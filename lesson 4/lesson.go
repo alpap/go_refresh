@@ -37,8 +37,61 @@ func main() {
 	fmt.Println(identityMatrix)
 	fmt.Println(identityMatrix2)
 
-	// slices
+	// slices are like arrays but using copy by reference insted of by value
 	a := []int{1, 2, 3}
+	b := a
+	fmt.Println(a)
+	fmt.Println(b)
+	b[1] = 4
+	fmt.Println(a)
+	fmt.Println(b)
 	fmt.Printf("%v, length %v \n", a, len(a))
 	fmt.Printf("%v, capacity %v \n", a, cap(a))
+
+	//creating slices even if an array is sliced it still uses reference
+	ab := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10} //...
+	bb := ab[:]
+	cb := ab[3:]
+	db := ab[:6]
+	eb := ab[3:6] // from the third elemnet up until nut not including the 6th element
+	fmt.Println(bb)
+	fmt.Println(cb)
+	fmt.Println(db)
+	fmt.Println(eb)
+
+	eb[1] = 123
+	fmt.Println(eb)
+	fmt.Println(ab)
+
+	// make
+	makeSlice := make([]int, 3)
+	fmt.Printf("%v, length %v \n", a, len(makeSlice))
+	fmt.Printf("%v, capacity %v \n", a, cap(makeSlice))
+	// make a slice with a higher capacity
+
+	makeSlice2 := make([]int, 3, 100)
+	fmt.Printf("%v, length %v \n", a, len(makeSlice2))
+	fmt.Printf("%v, capacity %v \n", a, cap(makeSlice2))
+	// functions
+	newSlice := []int{}
+
+	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
+	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
+	newSlice = append(newSlice, 1)
+
+	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
+	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
+
+	newSlice = append(newSlice, 2, 3, 4, 5)
+	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
+	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
+
+	// watch out cause the capacity is doubled here this can be memory inefficient
+	newSlice = append(newSlice, 2, 3, 4, 5)
+	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
+	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
+	// concatinating slices using th spread operator
+	newSlice = append(newSlice, []int{2, 3, 4, 5}...)
+	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
+	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
 }
