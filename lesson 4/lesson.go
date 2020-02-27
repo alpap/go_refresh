@@ -65,13 +65,13 @@ func main() {
 
 	// make
 	makeSlice := make([]int, 3)
-	fmt.Printf("%v, length %v \n", a, len(makeSlice))
-	fmt.Printf("%v, capacity %v \n", a, cap(makeSlice))
+	fmt.Printf("%v, length %v \n", makeSlice, len(makeSlice))
+	fmt.Printf("%v, capacity %v \n", makeSlice, cap(makeSlice))
 	// make a slice with a higher capacity
 
 	makeSlice2 := make([]int, 3, 100)
-	fmt.Printf("%v, length %v \n", a, len(makeSlice2))
-	fmt.Printf("%v, capacity %v \n", a, cap(makeSlice2))
+	fmt.Printf("%v, length %v \n", makeSlice2, len(makeSlice2))
+	fmt.Printf("%v, capacity %v \n", makeSlice2, cap(makeSlice2))
 	// functions
 	newSlice := []int{}
 
@@ -94,4 +94,21 @@ func main() {
 	newSlice = append(newSlice, []int{2, 3, 4, 5}...)
 	fmt.Printf("%v, length %v \n", newSlice, len(newSlice))
 	fmt.Printf("%v, capacity %v \n", newSlice, cap(newSlice))
+
+	// pop elements from the stack
+	// remove the first element from the slice
+	newCutSlice := newSlice[1:]
+	fmt.Printf("%v, length %v \n", newCutSlice, len(newCutSlice))
+	fmt.Printf("%v, capacity %v \n", newCutSlice, cap(newCutSlice))
+	// remove the last element from the slice
+	newCutSlice2 := newSlice[:len(newSlice)-1]
+	fmt.Printf("%v, length %v \n", newCutSlice2, len(newCutSlice2))
+	fmt.Printf("%v, capacity %v \n", newCutSlice2, cap(newCutSlice2))
+	// remove a middle element from the slice
+	newCutSlice3 := append(newSlice[2:4], newSlice[7:10]...)
+	fmt.Printf("%v, length %v \n", newCutSlice3, len(newCutSlice3))
+	fmt.Printf("%v, capacity %v \n", newCutSlice3, cap(newCutSlice3))
+	// watchout the original slice is geeting affected by this
+	fmt.Printf("%v, length %v \n", newCutSlice, len(newCutSlice))
+	fmt.Printf("%v, capacity %v \n", newCutSlice, cap(newCutSlice))
 }
