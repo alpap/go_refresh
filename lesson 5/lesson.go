@@ -63,12 +63,12 @@ func main() {
 	// struct
 	// check out the struct defined under the main function
 	person := Person{
-		id:      3,
-		name:    "alex",
-		surname: "papad",
+		Id:      3,
+		Name:    "alex",
+		Surname: "papad",
 	}
 	printOut(person)
-	printOut(person.name)
+	printOut(person.Name)
 
 	// anonymus structs
 	name := struct{ name string }{name: "john"}
@@ -76,21 +76,47 @@ func main() {
 
 	// structs are copied by value not by reference
 	person2 := person
-	person2.name = "jack"
+	person2.Name = "jack"
 
 	printOut(person)
 
 	// copy by reference
 	person3 := &person
-	person3.name = "jack"
+	person3.Name = "jack"
+
+	// composition
+	account := Account{}
+	account.Id = 34
+	account.Name = "jack"
+	account.Surname = "lorpad"
+	account.Money = 344434.22
+	printOut(account)
+
+	newAccount := Account{
+		Person: Person{Name: "John", Surname: "Travolta", Id: 34534},
+		Money:  32342,
+	}
+	printOut(newAccount)
+
+	// return the field on a given
+	// t := reflect.TypeOF(Person{})
+	// field, _ := t.FieldByName("Name")
+	// fmt.Println(field)
 }
 
 // if i want to export the struct i should name it with a capital letter as well as the fields as well if i want them to be populated outside the package
-
+// tags make certain objects required
 type Person struct {
-	id      int
-	name    string
-	surname string
+	Id      int
+	Name    string `required max:"100"`
+	Surname string
+}
+
+// composition inheritance alternative
+
+type Account struct {
+	Person
+	Money float64
 }
 
 func printOut(value interface{}) {
