@@ -53,5 +53,51 @@ func main() {
 	}
 
 	// switch
+	state := 2
+	switch state {
+	case 1:
+		println("only one")
+	case 2, 3, 4:
+		println("more than one")
+	default:
+		println("multiple")
+	}
 
+	// make a modification and then pass it to the case
+	switch i := state + 3; i {
+	case 1:
+		println("only one")
+	case 2, 3, 4:
+		println("more than one")
+	default:
+		println("multiple")
+	}
+
+	// tagless syntax
+	newState := 22
+	switch {
+	case newState < 1: // only this get evaluated it warks as an or
+		println("only one")
+		fallthrough // no matter what it will go and execute the next case
+	case newState <= 2:
+		println("more than one")
+	default:
+		println("multiple")
+	}
+
+	// type switch
+	var tp interface{} = 1
+	switch tp.(type) {
+	case int:
+		println("int")
+	case float64:
+		println("float")
+	case string:
+		println("string")
+	case [3]int:
+		println("array 3")
+	case [2]int: // different type from the above
+		break // break out of the switch
+		println("array 2")
+	}
 }
