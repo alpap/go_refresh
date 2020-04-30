@@ -1,12 +1,28 @@
 package main
 
-func main() {
-	// routines
-	go routine()
-}
+import (
+	"sync"
+)
 
-func correctGoRoutine() {
-	go func(message string) {
-		println(message)
-	}("correct way")
+var wg = sync.WaitGroup{}
+
+func main() {
+	// create channel
+	ch := make(chan int)
+
+	// create a wait routine
+	wg.Add(2)
+	go func() {
+		i := <-ch
+		println(i)
+		wg.Done()
+	}()
+
+	go func() {
+		ch <- 42
+		wg.Done()
+	}()
+
+	wg.Wait()
+
 }
