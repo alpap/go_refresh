@@ -142,6 +142,7 @@ var doneCh = make(chan struct{})
 //select
 
 func selectChannel() {
+	doneCh <- struct{}{}
 	for {
 		// select will wait till the selection is done
 		select {
@@ -153,3 +154,5 @@ func selectChannel() {
 		}
 	}
 }
+
+// basic for channel monotoring
